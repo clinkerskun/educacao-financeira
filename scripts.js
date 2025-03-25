@@ -1,29 +1,52 @@
+// Função de Juros Simples... oi oi oi 
+console.log("Hello, test1");
 function calcularJurosSimples() {
     let P = parseFloat(document.getElementById("principal-simples").value);
     let i = parseFloat(document.getElementById("taxa-simples").value) / 100;
-    let t = parseFloat(document.getElementById("tempo-simples").value);
+    let anos = parseInt(document.getElementById("anos-simples").value) || 0;
+    let meses = parseInt(document.getElementById("meses-simples").value) || 0;
 
-    if (isNaN(P) || isNaN(i) || isNaN(t)) {
-        alert("Por favor, preencha todos os campos corretamente.");
+    // Verificação de campos vazios
+    if (isNaN(P) || isNaN(i) || (anos === 0 && meses === 0)) {
+        alert("Preencha todos os campos corretamente.");
         return;
     }
 
+    // Conversão do tempo total para anos (meses viram fração de ano)
+    let t = anos + meses / 12;
+
+    // Cálculo de Juros Simples
     let J = P * i * t;
     let resultado = `Os juros simples são R$ ${J.toFixed(2)}.`;
-    document.getElementById("resultado-simples").innerText = resultado;
+
+    // Exibe o resultado
+    let elementoResultado = document.getElementById("resultado-simples");
+    elementoResultado.innerText = resultado;
+    elementoResultado.classList.add("mostrar");
 }
 
+// Função de Juros Compostos
 function calcularJurosCompostos() {
     let P = parseFloat(document.getElementById("principal-compostos").value);
     let i = parseFloat(document.getElementById("taxa-compostos").value) / 100;
-    let t = parseFloat(document.getElementById("tempo-compostos").value);
+    let anos = parseInt(document.getElementById("anos-compostos").value) || 0;
+    let meses = parseInt(document.getElementById("meses-compostos").value) || 0;
 
-    if (isNaN(P) || isNaN(i) || isNaN(t)) {
-        alert("Por favor, preencha todos os campos corretamente.");
+    // Verificação de campos vazios
+    if (isNaN(P) || isNaN(i) || (anos === 0 && meses === 0)) {
+        alert("Preencha todos os campos corretamente.");
         return;
     }
 
+    // Conversão do tempo total para anos (meses viram fração de ano)
+    let t = anos + meses / 12;
+
+    // Cálculo de Juros Compostos
     let F = P * Math.pow((1 + i), t);
     let resultado = `O montante final é R$ ${F.toFixed(2)}.`;
-    document.getElementById("resultado-compostos").innerText = resultado;
+
+    // Exibe o resultado
+    let elementoResultado = document.getElementById("resultado-compostos");
+    elementoResultado.innerText = resultado;
+    elementoResultado.classList.add("mostrar");
 }
